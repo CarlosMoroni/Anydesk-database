@@ -1,0 +1,173 @@
+:root {
+    --background-color: #F1F1F1;
+    --background-color-dark: #E6E6E6;
+    --line-color: #C8C8C8;
+    --line-color-black: #595959;
+    --text-color: #404040;
+    --red-elements: #E4271D;
+    --red-elements-dark: #b82018;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+}
+
+body {
+    background-color: var(--background-color);
+    position: relative;
+}
+
+nav {
+    background-color: var(--background-color-dark);
+    border: 2px solid var(--line-color);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 0 2em;
+    margin-bottom: 2em;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: flex;
+    gap: 0.5em;
+}
+
+nav ul li h1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+nav ul li input {
+    font-size: 16px;
+    padding: 0.2em;
+    border-radius: 0;
+    border: 1px solid var(--line-color-black);
+}
+
+nav ul li button {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: var(--red-elements);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+nav ul li button:hover {
+    background-color: var(--red-elements-dark);
+}
+
+main {
+    padding: 0 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding-bottom: 3em;
+}
+
+main section div.separador {
+    border-top: 2px solid var(--line-color);
+    padding: 0.5em 0;
+}
+
+main section div.separador h2 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+main section div.itens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+main section div.itens div.device {
+    border: 1px solid var(--line-color);
+    width: 300px;
+    height: 50px;
+    display: flex;
+    gap: 0.5em;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+main section div.itens div.device:hover {
+    background-color: var(--background-color-dark);
+    border: 1px solid var(--line-color-black);
+}
+
+main section div.itens div.device div.info-device {
+    overflow-y: hidden;
+    position: relative;
+    width: 100%;
+}
+
+main section div.itens div.device div.info-device img {
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 20px;
+}
+
+main section div.itens div.device div.info-device:hover {
+    overflow-y: auto;
+}
+
+main section div.itens div.device div.info-device p {
+    font-size: 12px;
+    width: 88%;
+}
+
+main div.add-to-edit {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main div.add-to-edit div.container{
+    background-color: var(--background-color);
+    width: 700px;
+    height: 500px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.534);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+main div.add-to-edit div.container div {
+    display: flex;
+    flex-direction: column;
+}
+
+main div.add-to-edit div.container div.action {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    flex-direction: row;
+    gap: 1em;
+}
