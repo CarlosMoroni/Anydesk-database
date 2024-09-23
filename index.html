@@ -25,7 +25,7 @@
         <ul>
             <li>
                 <input type="text" placeholder="Buscar">
-                <button><img src="/src/image/plus icon.svg" alt="adicionar"></button>
+                <button id="addNewDevice"><img src="/src/image/plus icon.svg" alt="adicionar"></button>
             </li>
         </ul>
     </nav>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="itens">
-                <div class="device">
+                <div class="device" draggable="true">
                     <img src="./src/image/icon device.png" alt="icone de dispositivo">
 
                     <div class="info-device">
@@ -56,7 +56,7 @@
             </div>
 
             <div class="itens">
-                <div class="device">
+                <!-- <div class="device">
                     <img src="./src/image/icon device.png" alt="icone de dispositivo">
 
                     <div class="info-device">
@@ -65,7 +65,7 @@
 
                         <img src="./src/image/edit.svg" alt="editar">
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
 
@@ -75,7 +75,7 @@
             </div>
 
             <div class="itens">
-                <div class="device">
+                <!-- <div class="device">
                     <img src="./src/image/icon device.png" alt="icone de dispositivo">
 
                     <div class="info-device">
@@ -84,7 +84,7 @@
 
                         <img src="./src/image/edit.svg" alt="editar">
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
 
@@ -94,7 +94,7 @@
             </div>
 
             <div class="itens">
-                <div class="device">
+                <!-- <div class="device">
                     <img src="./src/image/icon device.png" alt="icone de dispositivo">
 
                     <div class="info-device">
@@ -103,7 +103,7 @@
 
                         <img src="./src/image/edit.svg" alt="editar">
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
 
@@ -113,7 +113,7 @@
             </div>
 
             <div class="itens">
-                <div class="device">
+                <!-- <div class="device">
                     <img src="./src/image/icon device.png" alt="icone de dispositivo">
 
                     <div class="info-device">
@@ -122,36 +122,39 @@
 
                         <button><img src="./src/image/edit.svg" alt="editar"></button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </section>
 
         <!-- parte de adição ou edição de registros -->
-        <div class="add-to-edit">
-            <div class="container">
-                <div>
-                    <label for="nome">Nome</label>
-                    <input type="text" name="nome">
-                </div>
+        <div class="ativa" id="add-to-edit">
+            <div class="add-to-edit ativa">
+                <div class="container">
+                    <div>
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome">
+                    </div>
 
-                <div>
-                    <label for="id">Chave de acesso</label>
-                    <input type="text" name="id">
-                </div>
+                    <div>
+                        <label for="id">Chave de acesso</label>
+                        <input type="text" name="id">
+                    </div>
 
-                <div>
-                    <label for="description">Descrição</label>
-                    <input type="text" name="description">
-                </div>
+                    <div>
+                        <label for="description">Descrição</label>
+                        <input type="text" name="description">
+                    </div>
 
-                <div class="action">
-                    <button>Salvar</button>
-                    <button>Cancelar</button>
+                    <div class="action">
+                        <button>Salvar</button>
+                        <button id="closeDialog">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
+
     </main>
-    
+
 </body>
 
 </html>
