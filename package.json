@@ -2,13 +2,20 @@
   "name": "projeto-anydesk",
   "version": "1.0.0",
   "description": "projeto de criação de base com chaves de acesso anydesck",
-  "main": "script.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Carlos Moroni",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.3",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
   }
 }

@@ -9,7 +9,7 @@ function openEditNew() {
 
     closeDialog.addEventListener("click", () => {
         dialogNewEdit.classList.toggle("ativa")
-    })
+    })    
 }
 
 
