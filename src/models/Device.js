@@ -5,8 +5,15 @@ class Device extends Model {
         super.init({
             name_device: DataTypes.STRING,
             access_code: DataTypes.STRING,
-            category: DataTypes.STRING,
-        }, {
+            category: DataTypes.ENUM(
+                'SERVER', 
+                'JJ', 
+                'JK', 
+                'SK-TK', 
+                'SK-RB'
+            ),
+        }, 
+        {
             sequelize: sequelize
         });
     }
