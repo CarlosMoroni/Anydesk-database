@@ -14,7 +14,9 @@ class Device extends Model {
             ),
         }, 
         {
-            sequelize: sequelize
+            sequelize: sequelize,
+            modelName: "Device",
+            tableName: "device"
         });
     }
 }
