@@ -17,6 +17,7 @@ async function getAllElements() {
         })
         .then(data => {
             sepateArrayForCategories(data);
+            EditExistingDevices()
         })
         .catch(error => {
             console.error('Erro na requisição: ' + error);
@@ -24,6 +25,26 @@ async function getAllElements() {
 }
 
 getAllElements()
+
+async function getByPk(id) {
+    let urlNew = url + 'device/' + id
+
+    fetch(urlNew, {
+        method: 'GET'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Problema na rede: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error('Erro na requisição: ' + error);
+        })
+}
 
 // Create()
 async function createDevice(objeto) {
@@ -37,7 +58,7 @@ async function createDevice(objeto) {
         body: JSON.stringify(objeto)
     })
         .then(response => {
-            if(!response.ok){
+            if (!response.ok) {
                 throw new Error('Erro na requisição: ' + response.statusText);
             }
             return response.json();
@@ -98,7 +119,9 @@ function objToHtml(objeto) {
             <div class="info-device">
                 <p>${objeto.name_device}</p>
                 <p>ID: ${objeto.access_code}</p>
-                <img src="./src/image/edit.svg" alt="editar" id="edit">
+                <button class="edit" data-id="${objeto.id}">
+                    <img src="./src/image/edit.svg" alt="editar">
+                </button>
             </div>
         </div>
     `;
@@ -118,6 +141,7 @@ function connectToDevice(access_code) {
     });
 }
 
+
 // adiciona novos dispositivos e persiste os dados no banco
 function addNewDevice() {
     document.querySelector('#form-register').addEventListener('submit', (event) => {
@@ -132,23 +156,39 @@ function addNewDevice() {
         try {
             createDevice(formObj);
             form.reset();
-            location.reload(true)
+            // location.reload(true)
         } catch (error) {
             console.log("Erro: " + error);
         }
-        
     })
 }
 
 addNewDevice()
 
+// edita registro existente no banco de dados
+function EditExistingDevices() {
+    let button = document.querySelectorAll('button.edit');
+
+    button.forEach((item) => {
+        item.addEventListener('click', (event) => {
+            event.stopPropagation();
+            h2EdicaoRegistro();
+            openDialogEditDevice()
+
+            const deviceId = item.getAttribute('data-id');
+        })
+    })
+}
+
+function openDialogEditDevice() {
+    document.querySelector('#add-to-edit').classList.toggle('ativa');
+}
+
 function h2EdicaoRegistro() {
     document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
 }
 
-function h2NovoDispositivo() {
-    document.querySelector("div.text-label").innerHTML = '<h2>Adicionar novo dispositivo</h2>'
-}
+
 
 // usar o location para dar reload na pagina
 // let botao = document.querySelector('#edit');
