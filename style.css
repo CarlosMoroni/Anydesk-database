@@ -148,32 +148,77 @@ main div.add-to-edit {
     align-items: center;
 }
 
-main div.add-to-edit div.container{
+main div.add-to-edit form.container{
     background-color: var(--background-color);
-    width: 700px;
-    height: 500px;
+    width: 500px;
+    height: 350px;
+    border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.534);
+    padding: 1.5em 0;
     
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    gap: 1em;
 
     position: relative;
 }
 
-main div.add-to-edit div.container div {
-    display: flex;
-    flex-direction: column;
+main div.add-to-edit form.container div.text-label {
+    text-align: center;
+    color: var(--text-color);
 }
 
-main div.add-to-edit div.container div.action {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+main div.add-to-edit form.container div {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
 
+main div.add-to-edit form.container div input, select {
+    font-size: 16px;
+    padding: .5em; 
+    border-radius: 10px;
+    border: 1px solid var(--line-color);
+}
+
+main div.add-to-edit form.container div select {
+    width: 65%;
+}
+
+main div.add-to-edit form.container div.action {
+    position: absolute;
+    right: 2em;
+    bottom: 2em;
+    
     flex-direction: row;
-    gap: 1em;
+    justify-content: end;
+    gap: .75em;
+}
+
+main div.add-to-edit form.container div.action button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+main div.add-to-edit form.container div.action button.save {
+    background-color: rgb(26, 134, 26);
+}
+main div.add-to-edit form.container div.action button.save:hover {
+    background-color: rgb(17, 94, 17);
+}
+
+main div.add-to-edit form.container div.action button.cancel {
+    background-color: var(--red-elements);
+}
+main div.add-to-edit form.container div.action button.cancel:hover {
+    background-color: var(--red-elements-dark);
 }
 
 .ativa {

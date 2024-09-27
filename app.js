@@ -1,5 +1,6 @@
 // requisições http usando o fetch
 
+// getAll()
 var url = 'http://localhost:3333/'
 
 async function getAllElements() {
@@ -22,15 +23,36 @@ async function getAllElements() {
         })
 }
 
-async function createDevice() {
-    let urlNew = url + 'device/'
-    
-}
-
 getAllElements()
+
+// Create()
+async function createDevice(objeto) {
+    let urlNew = url + 'device/'
+
+    fetch(urlNew, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(objeto)
+    })
+        .then(response => {
+            if(!response.ok){
+                throw new Error('Erro na requisição: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Sucesso: " + data);
+        })
+        .catch(error => {
+            console.error("Erro: " + error);
+        })
+}
 
 
 // funções de interação com o usuario
+// busca disositivos na base de dados e exibe na tala
 function sepateArrayForCategories(arrayObj) {
     let servidoresHTML = '';
     let jjHTML = '';
@@ -94,6 +116,17 @@ function connectToDevice(access_code) {
     window.addEventListener('blur', function () {
         clearTimeout(timeout);
     });
+}
+
+// adiciona novos dispositivos e persiste os dados no banco
+
+
+function h2EdicaoRegistro() {
+    document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
+}
+
+function h2NovoDispositivo() {
+    document.querySelector("div.text-label").innerHTML = '<h2>Adicionar novo dispositivo</h2>'
 }
 
 // usar o location para dar reload na pagina

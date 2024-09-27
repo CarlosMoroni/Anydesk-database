@@ -84,8 +84,9 @@
 
         <!-- parte de adição ou edição de registros -->
         <div class="ativa" id="add-to-edit">
-            <div class="add-to-edit ativa">
-                <div class="container">
+            <div class="add-to-edit">
+                <form class="container">
+                    <div class="text-label"></div>
                     <div>
                         <label for="nome">Nome</label>
                         <input type="text" name="nome">
@@ -97,15 +98,22 @@
                     </div>
 
                     <div>
-                        <label for="description">Descrição</label>
-                        <input type="text" name="description">
+                        <label for="category">Categoria</label>
+                        <select name="category" id="category">
+                            <option value="" selected>Selecione</option>
+                            <option value="SERVER">Servidores</option>
+                            <option value="JJ">Distribuidora JJ</option>
+                            <option value="JK">Distribuidora JK</option>
+                            <option value="SK-TK">Supermercado Kauan de Tarauaca</option>
+                            <option value="SK-RB">Supermercado Kauan de Rio Branco</option>
+                        </select>
                     </div>
 
                     <div class="action">
-                        <button>Salvar</button>
-                        <button id="closeDialog">Cancelar</button>
+                        <button class="save" type="submit"><img src="./src/image/save.svg" alt="salvar"></button>
+                        <button class="cancel" id="closeDialog" type="button"><img src="./src/image/close.svg" alt=""></button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
