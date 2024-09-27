@@ -48,7 +48,7 @@
             </div>
 
             <div class="itens" id="distribuidora-jj">
-                
+
             </div>
         </section>
 
@@ -58,7 +58,7 @@
             </div>
 
             <div class="itens" id="distribuidora-jk">
-                
+
             </div>
         </section>
 
@@ -68,7 +68,7 @@
             </div>
 
             <div class="itens" id="sk-tk-container">
-                
+
             </div>
         </section>
 
@@ -78,28 +78,28 @@
             </div>
 
             <div class="itens" id="sk-rb-container">
-                
+
             </div>
         </section>
 
         <!-- parte de adição ou edição de registros -->
         <div class="ativa" id="add-to-edit">
             <div class="add-to-edit">
-                <form class="container">
+                <form class="container" id="form-register">
                     <div class="text-label"></div>
                     <div>
                         <label for="nome">Nome</label>
-                        <input type="text" name="nome">
+                        <input type="text" name="name_device" required>
                     </div>
 
                     <div>
                         <label for="id">Chave de acesso</label>
-                        <input type="text" name="id">
+                        <input type="text" name="access_code" required>
                     </div>
 
                     <div>
                         <label for="category">Categoria</label>
-                        <select name="category" id="category">
+                        <select name="category" id="category" required>
                             <option value="" selected>Selecione</option>
                             <option value="SERVER">Servidores</option>
                             <option value="JJ">Distribuidora JJ</option>
@@ -110,8 +110,8 @@
                     </div>
 
                     <div class="action">
-                        <button class="save" type="submit"><img src="./src/image/save.svg" alt="salvar"></button>
-                        <button class="cancel" id="closeDialog" type="button"><img src="./src/image/close.svg" alt=""></button>
+                        <button class="save" type="submit"><img src="./src/image/save.svg" alt="Salvar"></button>
+                        <button class="cancel" id="closeDialog" type="button"><img src="./src/image/close.svg" alt="Cancelar"></button>
                     </div>
                 </form>
             </div>

@@ -119,7 +119,28 @@ function connectToDevice(access_code) {
 }
 
 // adiciona novos dispositivos e persiste os dados no banco
+function addNewDevice() {
+    document.querySelector('#form-register').addEventListener('submit', (event) => {
+        event.preventDefault();
 
+        const form = event.target;
+        const formData = new FormData(form);
+
+        const formObj = Object.fromEntries(formData.entries());
+        console.log(formObj);
+
+        try {
+            createDevice(formObj);
+            form.reset();
+            location.reload(true)
+        } catch (error) {
+            console.log("Erro: " + error);
+        }
+        
+    })
+}
+
+addNewDevice()
 
 function h2EdicaoRegistro() {
     document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
