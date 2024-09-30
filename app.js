@@ -24,31 +24,50 @@ async function getAllElements() {
         })
 }
 
-getAllElements()
-
 async function getByPk(id) {
     let urlNew = url + 'device/' + id
 
-    fetch(urlNew, {
-        method: 'GET'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Problema na rede: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            return data;
-        })
-        .catch(error => {
-            console.error('Erro na requisição: ' + error);
-        })
+    try {
+        const response = await fetch(urlNew, { method: 'GET' });
+
+        if (!response.ok) {
+            throw new Error('Problema na rede: ' + response.status);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 // Create()
 async function createDevice(objeto) {
     let urlNew = url + 'device/'
+
+    if (id) {
+        urlNew += objeto.id;
+
+        fetch(urlNew, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objeto)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na requisição: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Sucesso: " + data);
+            })
+            .catch(error => {
+                console.error("Erro: " + error);
+            })
+    }
 
     fetch(urlNew, {
         method: 'POST',
@@ -70,6 +89,8 @@ async function createDevice(objeto) {
             console.error("Erro: " + error);
         })
 }
+
+getAllElements()
 
 
 // funções de interação com o usuario
@@ -128,7 +149,10 @@ function objToHtml(objeto) {
 }
 
 function connectToDevice(access_code) {
-    const anydeskUrl = `anydesk://${access_code}`
+    formatAccessCode = access_code.split(' ').join('');
+    formatAccessCode = access_code.split('.').join('');
+    
+    const anydeskUrl = `anydesk://${formatAccessCode}`
 
     const timeout = setTimeout(() => {
         alert('Parece que você não tem o AnyDesk instalado. Por favor, instale o aplicativo para se conectar ao dispositivo.');
@@ -156,7 +180,7 @@ function addNewDevice() {
         try {
             createDevice(formObj);
             form.reset();
-            // location.reload(true)
+            location.reload(true)
         } catch (error) {
             console.log("Erro: " + error);
         }
@@ -172,19 +196,36 @@ function EditExistingDevices() {
     button.forEach((item) => {
         item.addEventListener('click', (event) => {
             event.stopPropagation();
-            h2EdicaoRegistro();
+            h2LabelDialog();
             openDialogEditDevice()
 
             const deviceId = item.getAttribute('data-id');
+            returnObjDevice(deviceId)
         })
     })
+}
+
+async function returnObjDevice(id) {
+    try {
+        const objDevice = await getByPk(id)
+        populationFormFields(objDevice);
+    } catch (error) {
+        console.log("erro nna funcao returnObjDevice" + error);
+    }
+}
+
+function populationFormFields(objDevice) {
+    document.querySelector('#id').value = objDevice.id
+    document.querySelector('#name_device').value = objDevice.name_device
+    document.querySelector('#access_code').value = objDevice.access_code
+    document.querySelector('#category').value = objDevice.category
 }
 
 function openDialogEditDevice() {
     document.querySelector('#add-to-edit').classList.toggle('ativa');
 }
 
-function h2EdicaoRegistro() {
+function h2LabelDialog() {
     document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
 }
 
