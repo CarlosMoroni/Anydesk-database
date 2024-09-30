@@ -191,16 +191,22 @@ main div.add-to-edit form.container div select {
 }
 
 main div.add-to-edit form.container div.action {
-    position: absolute;
-    right: 2em;
-    bottom: 2em;
+    margin-top: 1em;
     
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-between;
     gap: .75em;
 }
 
-main div.add-to-edit form.container div.action button {
+main div.add-to-edit form.container div.action div.default {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: .5em;
+    width: 100%;
+}
+
+main div.add-to-edit form.container div.action div button {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -211,20 +217,27 @@ main div.add-to-edit form.container div.action button {
     cursor: pointer;
 }
 
-main div.add-to-edit form.container div.action button.save {
+main div.add-to-edit form.container div.action div button.save {
     background-color: rgb(26, 134, 26);
 }
-main div.add-to-edit form.container div.action button.save:hover {
+main div.add-to-edit form.container div.action div button.save:hover {
     background-color: rgb(17, 94, 17);
 }
 
-main div.add-to-edit form.container div.action button.cancel {
+main div.add-to-edit form.container div.action div button.cancel {
     background-color: var(--red-elements);
 }
-main div.add-to-edit form.container div.action button.cancel:hover {
+main div.add-to-edit form.container div.action div button.cancel:hover {
+    background-color: var(--red-elements-dark);
+}
+
+main div.add-to-edit form.container div.action div button.delete {
+    background-color: var(--red-elements);
+}
+main div.add-to-edit form.container div.action div button.delete:hover {
     background-color: var(--red-elements-dark);
 }
 
 .ativa, #hiden {
-    display: none;
+    display: none !important;
 }

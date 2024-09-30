@@ -197,10 +197,11 @@ function EditExistingDevices() {
         item.addEventListener('click', (event) => {
             event.stopPropagation();
             h2LabelDialog();
-            openDialogEditDevice()
-
+            openDialogEditDevice();
+            
             const deviceId = item.getAttribute('data-id');
-            returnObjDevice(deviceId)
+            returnObjDevice(deviceId);
+            deleteRegister(deviceId);
         })
     })
 }
@@ -222,7 +223,19 @@ function populationFormFields(objDevice) {
 }
 
 function openDialogEditDevice() {
-    document.querySelector('#add-to-edit').classList.toggle('ativa');
+    let deletContainer = document.querySelector('#delete-container');
+    deletContainer.classList.toggle('ativa');
+
+    let openDialogOrClose = document.querySelector('#add-to-edit');
+    openDialogOrClose.classList.toggle('ativa');
+}
+
+function deleteRegister(id) {
+    let deletButton = document.querySelector('#delete');
+    deletButton.addEventListener('click', () => {
+        console.log(id);
+        location.reload(true)
+    })
 }
 
 function h2LabelDialog() {
