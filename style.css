@@ -241,3 +241,22 @@ main div.add-to-edit form.container div.action div button.delete:hover {
 .ativa, #hiden {
     display: none !important;
 }
+
+.alerta-positivo {
+    background-color: green;
+    width: 260px;
+    height: 40px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 200ms;
+}
+
+.alerta-positivo p {
+    color: white;
+}

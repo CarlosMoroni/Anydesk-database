@@ -2,6 +2,7 @@ function openEditNew() {
     let addNew = document.querySelector('#addNewDevice');
     let dialogNewEdit = document.querySelector('#add-to-edit');
     let closeDialog = document.querySelector('#closeDialog');
+    let deletContainer = document.querySelector('#delete-container');
 
     addNew.addEventListener("click", () => {
         dialogNewEdit.classList.toggle("ativa");
@@ -11,7 +12,10 @@ function openEditNew() {
     closeDialog.addEventListener("click", () => {
         document.querySelector('#form-register').reset();
         dialogNewEdit.classList.toggle("ativa");
-    });    
+
+        deletContainer.classList.add('ativa');
+        location.reload(true)
+    });
 }
 
 openEditNew();

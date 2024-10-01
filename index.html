@@ -48,7 +48,7 @@
             </div>
 
             <div class="itens" id="distribuidora-jj">
-
+                <!-- incluido via javascript -->
             </div>
         </section>
 
@@ -58,7 +58,7 @@
             </div>
 
             <div class="itens" id="distribuidora-jk">
-
+                <!-- incluido via javascript -->
             </div>
         </section>
 
@@ -68,7 +68,7 @@
             </div>
 
             <div class="itens" id="sk-tk-container">
-
+                <!-- incluido via javascript -->
             </div>
         </section>
 
@@ -78,7 +78,7 @@
             </div>
 
             <div class="itens" id="sk-rb-container">
-
+                <!-- incluido via javascript -->
             </div>
         </section>
 
@@ -95,12 +95,12 @@
 
                     <div>
                         <label for="nome">Nome</label>
-                        <input type="text" name="name_device" id="name_device" required>
+                        <input type="text" name="name_device" id="name_device" maxlength="255" required>
                     </div>
 
                     <div>
                         <label for="id">Chave de acesso</label>
-                        <input type="text" name="access_code" id="access_code" required>
+                        <input type="text" name="access_code" id="access_code" maxlength="255" required>
                     </div>
 
                     <div>
@@ -116,17 +116,25 @@
                     </div>
 
                     <div class="action" id="action">
+                        <!-- botao para deletar dispositivos -->
                         <div id="delete-container" class="ativa">
-                            <button class="delete" id="delete" type="button"><img src="./src/image/delete.svg" alt="Deletar"></button>
+                            <button class="delete" id="delete" type="button"><img src="./src/image/delete.svg"
+                                    alt="Deletar"></button>
                         </div>
 
                         <div class="default">
                             <button class="save" type="submit"><img src="./src/image/save.svg" alt="Salvar"></button>
-                            <button class="cancel" id="closeDialog" type="button"><img src="./src/image/close.svg" alt="Cancelar"></button>
+                            <button class="cancel" id="closeDialog" type="button"><img src="./src/image/close.svg"
+                                    alt="Cancelar"></button>
                         </div>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <!-- alerta positivo -->
+        <div id="alerta-positivo" class="alerta-positivo ativa">
+            <p>Operação realizada com sucesso!</p>
         </div>
     </main>
 

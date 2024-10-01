@@ -1,5 +1,4 @@
 // requisições http usando o fetch
-
 // getAll()
 var url = 'http://localhost:3333/'
 
@@ -90,6 +89,27 @@ async function createDevice(objeto) {
         })
 }
 
+async function deleteDevice(id) {
+    let urlNew = url + 'device/' + id
+
+    fetch(urlNew, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Problema na rede: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            successAlert();
+        })
+        .catch(error => {
+            console.error('Erro na requisição: ' + error);
+        })
+
+}
+
 getAllElements()
 
 
@@ -151,7 +171,9 @@ function objToHtml(objeto) {
 function connectToDevice(access_code) {
     formatAccessCode = access_code.split(' ').join('');
     formatAccessCode = access_code.split('.').join('');
-    
+    formatAccessCode = access_code.split('-').join('');
+    formatAccessCode = access_code.split('_').join('');
+
     const anydeskUrl = `anydesk://${formatAccessCode}`
 
     const timeout = setTimeout(() => {
@@ -198,8 +220,9 @@ function EditExistingDevices() {
             event.stopPropagation();
             h2LabelDialog();
             openDialogEditDevice();
-            
+
             const deviceId = item.getAttribute('data-id');
+
             returnObjDevice(deviceId);
             deleteRegister(deviceId);
         })
@@ -232,20 +255,30 @@ function openDialogEditDevice() {
 
 function deleteRegister(id) {
     let deletButton = document.querySelector('#delete');
+
     deletButton.addEventListener('click', () => {
-        console.log(id);
-        location.reload(true)
+        handleDelete(id)
     })
+}
+
+function handleDelete(id) {
+    if (confirm("Deseja Deletar esse dispositivo?")) {
+        deleteDevice(id);
+    }
 }
 
 function h2LabelDialog() {
     document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
 }
 
+function successAlert() {
+    let alert = document.querySelector('#alerta-positivo');
+    alert.classList.toggle('ativa');
 
+    let openDialogOrClose = document.querySelector('#form-register');
+    openDialogOrClose.classList.toggle('ativa');
 
-// usar o location para dar reload na pagina
-// let botao = document.querySelector('#edit');
-// botao.addEventListener('click', () => {
-//     location.reload(true)
-// })
+    setInterval(() => {
+        location.reload(true)
+    }, 500)
+};
