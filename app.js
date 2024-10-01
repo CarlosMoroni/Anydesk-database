@@ -160,6 +160,7 @@ function objToHtml(objeto) {
             <div class="info-device">
                 <p>${objeto.name_device}</p>
                 <p>ID: ${objeto.access_code}</p>
+                <p>Setor: ${objeto.department}</p>
                 <button class="edit" data-id="${objeto.id}">
                     <img src="./src/image/edit.svg" alt="editar">
                 </button>
@@ -243,6 +244,7 @@ function populationFormFields(objDevice) {
     document.querySelector('#name_device').value = objDevice.name_device
     document.querySelector('#access_code').value = objDevice.access_code
     document.querySelector('#category').value = objDevice.category
+    document.querySelector('#department').value = objDevice.department
 }
 
 function openDialogEditDevice() {

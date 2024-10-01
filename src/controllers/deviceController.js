@@ -2,13 +2,14 @@ const Device = require('../models/Device');
 
 module.exports = {
     async createDevice(req, res) {
-        const { name_device, access_code, category } = req.body;
+        const { name_device, access_code, category, department } = req.body;
 
         try {
             const device = await Device.create({
                 name_device: name_device,
                 access_code: access_code,
-                category: category
+                category: category,
+                department: department
             })
 
             return res.status(201).json(device);
