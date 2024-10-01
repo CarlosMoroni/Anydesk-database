@@ -5,6 +5,7 @@ class Device extends Model {
         super.init({
             name_device: DataTypes.STRING,
             access_code: DataTypes.STRING,
+            department: DataTypes.STRING,
             category: DataTypes.ENUM(
                 'SERVER', 
                 'JJ', 

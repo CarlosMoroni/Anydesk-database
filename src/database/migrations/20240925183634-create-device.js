@@ -18,6 +18,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      department: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       category: {
         type: Sequelize.ENUM,
         values: ['SERVER', 'JJ', 'JK', 'SK-TK', 'SK-RB'],

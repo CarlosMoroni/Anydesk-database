@@ -8,6 +8,7 @@ module.exports = {
         name_device: '1º  Serv. JJ Nota Fiscais e WTA',
         access_code: 'ID:801564593',
         category: 'SERVER',
+        department: 'TI',
         created_at: new Date(),
         updated_at: new Date(),
       }
