@@ -1,119 +1,16 @@
-// requisições http usando o fetch
-// getAll()
-var url = 'http://localhost:3333/'
-
-async function getAllElements() {
-    let urlNew = url + 'device/'
-
-    fetch(urlNew, {
-        method: 'GET'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Problema na rede: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            sepateArrayForCategories(data);
-            EditExistingDevices()
-        })
-        .catch(error => {
-            console.error('Erro na requisição: ' + error);
-        })
-}
-
-async function getByPk(id) {
-    let urlNew = url + 'device/' + id
-
-    try {
-        const response = await fetch(urlNew, { method: 'GET' });
-
-        if (!response.ok) {
-            throw new Error('Problema na rede: ' + response.status);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// Create()
-async function createDevice(objeto) {
-    let urlNew = url + 'device/'
-
-    if (id) {
-        urlNew += objeto.id;
-
-        fetch(urlNew, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(objeto)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro na requisição: ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Sucesso: " + data);
-            })
-            .catch(error => {
-                console.error("Erro: " + error);
-            })
-    }
-
-    fetch(urlNew, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(objeto)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro na requisição: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Sucesso: " + data);
-        })
-        .catch(error => {
-            console.error("Erro: " + error);
-        })
-}
-
-async function deleteDevice(id) {
-    let urlNew = url + 'device/' + id
-
-    fetch(urlNew, {
-        method: 'DELETE'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Problema na rede: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            successAlert();
-        })
-        .catch(error => {
-            console.error('Erro na requisição: ' + error);
-        })
-
-}
-
-getAllElements()
+const deviceService = new DeviceService();
 
 
 // funções de interação com o usuario
+async function onloadBody() {
+    const allDevice = await deviceService.getAllElements();
+    sepateArrayForCategories(allDevice)
+    EditExistingDevices()
+}
+
+onloadBody()
+
+
 // busca disositivos na base de dados e exibe na tala
 function sepateArrayForCategories(arrayObj) {
     let servidoresHTML = '';
@@ -158,7 +55,7 @@ function objToHtml(objeto) {
         <div class="device" draggable="true" onclick="connectToDevice('${objeto.access_code}')")>
             <img src="./src/image/icon device.png" alt="icone de dispositivo">
             <div class="info-device">
-                <p>${objeto.name_device}</p>
+                <p>Nome: ${objeto.name_device}</p>
                 <p>ID: ${objeto.access_code}</p>
                 <p>Setor: ${objeto.department}</p>
                 <button class="edit" data-id="${objeto.id}">
@@ -198,12 +95,12 @@ function addNewDevice() {
         const formData = new FormData(form);
 
         const formObj = Object.fromEntries(formData.entries());
-        console.log(formObj);
-
+        
         try {
-            createDevice(formObj);
+            deviceService.createDevice(formObj);
             form.reset();
-            location.reload(true)
+
+            location.reload(true);
         } catch (error) {
             console.log("Erro: " + error);
         }
@@ -232,7 +129,7 @@ function EditExistingDevices() {
 
 async function returnObjDevice(id) {
     try {
-        const objDevice = await getByPk(id)
+        const objDevice = await deviceService.getByPk(id);
         populationFormFields(objDevice);
     } catch (error) {
         console.log("erro nna funcao returnObjDevice" + error);
@@ -265,7 +162,7 @@ function deleteRegister(id) {
 
 function handleDelete(id) {
     if (confirm("Deseja Deletar esse dispositivo?")) {
-        deleteDevice(id);
+        deviceService.deleteDevice(id);
     }
 }
 
