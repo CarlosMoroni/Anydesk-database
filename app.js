@@ -1,17 +1,32 @@
 const deviceService = new DeviceService();
-
-
 // funções de interação com o usuario
+
+/**
+ * Roda assim que a pagina é carregada
+ *
+ * @async
+ * @returns {null} 
+ */
 async function onloadBody() {
+    
+    /**
+     * array de objetos do tipo Device
+     *
+     * @type {Array<Device>}
+     */
     const allDevice = await deviceService.getAllElements();
+
     sepateArrayForCategories(allDevice)
     EditExistingDevices()
 }
 
 onloadBody()
 
-
-// busca disositivos na base de dados e exibe na tala
+/**
+ * itera o array e Separa os dispositivos por seções, de acordo com o parametro category
+ *
+ * @param {Array<Device>} arrayObj
+ */
 function sepateArrayForCategories(arrayObj) {
     let servidoresHTML = '';
     let jjHTML = '';
@@ -50,6 +65,14 @@ function sepateArrayForCategories(arrayObj) {
     document.querySelector('#sk-rb-container').innerHTML = skRbHTML;
 }
 
+
+/**
+ * Recebe o objeto do tipo Device e transforma em uma string HTML
+ * um elemento device que sera renderizado na tela.
+ *
+ * @param {Device} objeto
+ * @returns {string}
+ */
 function objToHtml(objeto) {
     return `
         <div class="device" draggable="true" onclick="connectToDevice('${objeto.access_code}')")>
@@ -66,6 +89,12 @@ function objToHtml(objeto) {
     `;
 }
 
+/**
+ * faz a URL de conexão do anydesck, e abre o aplicativo, caso nao tenha o aplicativo ele exibe mensagen,
+ *  trata o erro caso o parametro venha com ( . , - _ );
+ *
+ * @param {String} access_code
+ */
 function connectToDevice(access_code) {
     formatAccessCode = access_code.split(' ').join('');
     formatAccessCode = access_code.split('.').join('');
@@ -85,8 +114,11 @@ function connectToDevice(access_code) {
     });
 }
 
-
-// adiciona novos dispositivos e persiste os dados no banco
+/**
+ *  adiciona novos dispositivos e persiste os dados no banco,
+ *  puxa os dados do formulario e aciona a função no botao submit. 
+ * 
+ */
 function addNewDevice() {
     document.querySelector('#form-register').addEventListener('submit', (event) => {
         event.preventDefault();
@@ -104,7 +136,7 @@ function addNewDevice() {
         } catch (error) {
             console.log("Erro: " + error);
         }
-    })
+    });
 }
 
 addNewDevice()

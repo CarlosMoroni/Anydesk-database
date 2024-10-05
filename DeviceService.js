@@ -120,7 +120,7 @@ class DeviceService {
      * deleta linha com ID correspondente ao paramentro.
      *
      * @async
-     * @param {number} id
+     * @param {Number} id
      * @returns {JSON} response
      */
     async deleteDevice(id) {
@@ -145,5 +145,3 @@ class DeviceService {
         }
     };
 }
-
-// module.exports = DeviceService;
