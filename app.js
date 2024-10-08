@@ -8,7 +8,7 @@ const deviceService = new DeviceService();
  * @returns {null} 
  */
 async function onloadBody() {
-    
+
     /**
      * array de objetos do tipo Device
      *
@@ -127,9 +127,9 @@ function addNewDevice() {
         const formData = new FormData(form);
 
         const formObj = Object.fromEntries(formData.entries());
-        
+
         try {
-            deviceService.createDevice(formObj);
+            deviceService.saveDevice(formObj);
             form.reset();
 
             location.reload(true);
@@ -141,7 +141,10 @@ function addNewDevice() {
 
 addNewDevice()
 
-// edita registro existente no banco de dados
+
+/** 
+ * Itera sobre os botoes edit de cada componente e adiciona as funções equivalentes.
+ */
 function EditExistingDevices() {
     let button = document.querySelectorAll('button.edit');
 
@@ -153,21 +156,34 @@ function EditExistingDevices() {
 
             const deviceId = item.getAttribute('data-id');
 
-            returnObjDevice(deviceId);
+            searchDeviceById(deviceId);
             deleteRegister(deviceId);
         })
     })
 }
 
-async function returnObjDevice(id) {
+/**
+ * faz a busca no banco de dados por um device.
+ *
+ * @async
+ * @param {number} id
+ * @returns {void}
+ */
+async function searchDeviceById(id) {
     try {
         const objDevice = await deviceService.getByPk(id);
         populationFormFields(objDevice);
     } catch (error) {
-        console.log("erro nna funcao returnObjDevice" + error);
+        console.log("erro nna funcao searchDeviceById" + error);
     }
 }
 
+
+/**
+ * popula o formulario com os dados do device passado no objDevice.
+ *
+ * @param {Device} objDevice
+ */
 function populationFormFields(objDevice) {
     document.querySelector('#id').value = objDevice.id
     document.querySelector('#name_device').value = objDevice.name_device
@@ -176,6 +192,10 @@ function populationFormFields(objDevice) {
     document.querySelector('#department').value = objDevice.department
 }
 
+/** 
+ * abre o dialog com o formulario de edição de devices e o 
+ * conteiner que conten o botao de exclusao de devices.
+ */
 function openDialogEditDevice() {
     let deletContainer = document.querySelector('#delete-container');
     deletContainer.classList.toggle('ativa');
@@ -184,32 +204,27 @@ function openDialogEditDevice() {
     openDialogOrClose.classList.toggle('ativa');
 }
 
+/**
+ * deleta um device do banco de dados via requisição do tipo DELETE.
+ *
+ * @param {number} id
+ */
 function deleteRegister(id) {
     let deletButton = document.querySelector('#delete');
 
     deletButton.addEventListener('click', () => {
-        handleDelete(id)
+        if (confirm("Deseja Deletar esse dispositivo?")) {
+            deviceService.deleteDevice(id);
+
+            location.reload(true)
+        }
     })
 }
 
-function handleDelete(id) {
-    if (confirm("Deseja Deletar esse dispositivo?")) {
-        deviceService.deleteDevice(id);
-    }
-}
-
+/** 
+ * adiciona o label que indica que o formulario 
+ * é de edição de registros existentes  
+ */
 function h2LabelDialog() {
     document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
 }
-
-function successAlert() {
-    let alert = document.querySelector('#alerta-positivo');
-    alert.classList.toggle('ativa');
-
-    let openDialogOrClose = document.querySelector('#form-register');
-    openDialogOrClose.classList.toggle('ativa');
-
-    setInterval(() => {
-        location.reload(true)
-    }, 500)
-};

@@ -9,6 +9,14 @@ class DeviceService {
         this.url = "http://localhost:3333/device/";
     };
 
+    #showLoader() {
+        document.getElementById('load-container').style.display = 'flex';
+    }
+    
+    #hideLoader() {
+        document.getElementById('load-container').style.display = 'none';
+    }
+
     /**
      * função findAll( ) da tabela device.
      *
@@ -16,6 +24,7 @@ class DeviceService {
      * @returns {Promise<Array|null>} retorna um array de objetos
      */
     async getAllElements() {
+        this.#showLoader()
         try {
             const response = await fetch(this.url, { method: 'GET' });
 
@@ -28,6 +37,8 @@ class DeviceService {
         } catch (error) {
             console.error('Erro na requisição: ' + error);
             return null;
+        } finally {
+            this.#hideLoader()
         }
     };
 
@@ -41,6 +52,7 @@ class DeviceService {
      */
     async getByPk(id) {
         let urlNew = this.url + id
+        this.#showLoader()
 
         try {
             const response = await fetch(urlNew, { method: 'GET' });
@@ -55,6 +67,8 @@ class DeviceService {
             return data;
         } catch (error) {
             console.log(error);
+        } finally {
+            this.#hideLoader()
         }
     };
 
@@ -67,9 +81,10 @@ class DeviceService {
      * @param {Device} objeto
      * @returns {JSON} response
      */
-    async createDevice(objeto) {
+    async saveDevice(objeto) {
         let urlNew = this.url;
-
+        this.#showLoader()
+        
         try {
             // Se existir um id, será feito um PUT para atualizar
             if (objeto.id) {
@@ -112,6 +127,8 @@ class DeviceService {
         } catch (error) {
             console.error("Erro na requisição: " + error);
             return null;  // Retorna null em caso de erro
+        } finally {
+            this.#hideLoader()
         }
     };
 
@@ -125,7 +142,8 @@ class DeviceService {
      */
     async deleteDevice(id) {
         let urlNew = this.url + id;
-
+        this.#showLoader()
+        
         try {
             const response = await fetch(urlNew, {
                 method: 'DELETE'
@@ -142,6 +160,8 @@ class DeviceService {
         } catch (error) {
             console.error('Erro na requisição: ' + error);
             return null;  // Retorna null em caso de erro
+        } finally {
+            this.#hideLoader()
         }
     };
 }
