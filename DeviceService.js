@@ -1,5 +1,5 @@
 /**
- * Classe que conten todas as funções que fazem requisição no banco de dados da tabela device.
+ * Classe que contem todas as funções que fazem requisição no banco de dados da tabela device.
  *
  * @class DeviceService
  */
@@ -62,7 +62,6 @@ class DeviceService {
             }
 
             const data = await response.json();
-            console.log(data);
 
             return data;
         } catch (error) {
@@ -72,6 +71,9 @@ class DeviceService {
         }
     };
 
+    async getSearchTerm(url) {
+        
+    }
     
     /**
      * faz a requisição do tipo POST caso parametro de entrada nao conter ID,
@@ -143,7 +145,7 @@ class DeviceService {
     async deleteDevice(id) {
         let urlNew = this.url + id;
         this.#showLoader()
-        
+
         try {
             const response = await fetch(urlNew, {
                 method: 'DELETE'

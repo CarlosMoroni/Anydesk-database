@@ -58,6 +58,23 @@ function sepateArrayForCategories(arrayObj) {
         }
     });
 
+    if(!servidoresHTML){
+        let container = document.getElementById('container-servidores');
+        container.style.display = 'none'
+    } if(!jjHTML) {
+        let container = document.getElementById('jj-distribuidora-container');
+        container.style.display = 'none'
+    } if(!jkHTML) {
+        let container = document.getElementById('jk-distribuidora-container');
+        container.style.display = 'none'
+    } if(!skTkHTML) {
+        let container = document.getElementById('sk-tk');
+        container.style.display = 'none'
+    } if(!skRbHTML) {
+        let container = document.getElementById('sk-rb');
+        container.style.display = 'none'
+    }
+
     document.querySelector('#servidores').innerHTML = servidoresHTML;
     document.querySelector('#distribuidora-jj').innerHTML = jjHTML;
     document.querySelector('#distribuidora-jk').innerHTML = jkHTML;
@@ -90,7 +107,7 @@ function objToHtml(objeto) {
 }
 
 /**
- * faz a URL de conexão do anydesck, e abre o aplicativo, caso nao tenha o aplicativo ele exibe mensagen,
+ *  faz a URL de conexão do anydesck, e abre o aplicativo, caso nao tenha o aplicativo ele exibe mensagen,
  *  trata o erro caso o parametro venha com ( . , - _ );
  *
  * @param {String} access_code
@@ -104,11 +121,11 @@ function connectToDevice(access_code) {
     const anydeskUrl = `anydesk://${formatAccessCode}`
 
     const timeout = setTimeout(() => {
-        alert('Parece que você não tem o AnyDesk instalado. Por favor, instale o aplicativo para se conectar ao dispositivo.');
+        alert('Parece que você não tem o AnyDesk instalado ou não esta aberto. Por favor, instale ou abra o aplicativo para se conectar ao dispositivo.');
     }, 1000);
 
     window.location.href = anydeskUrl;
-
+    
     window.addEventListener('blur', function () {
         clearTimeout(timeout);
     });
