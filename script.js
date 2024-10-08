@@ -14,7 +14,6 @@ function openEditNew() {
         dialogNewEdit.classList.toggle("ativa");
 
         deletContainer.classList.add('ativa');
-        location.reload(true)
     });
 }
 

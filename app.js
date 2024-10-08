@@ -16,8 +16,11 @@ async function onloadBody() {
      */
     const allDevice = await deviceService.getAllElements();
 
-    sepateArrayForCategories(allDevice)
-    EditExistingDevices()
+    sepateArrayForCategories(allDevice);
+    EditExistingDevices();
+    search_devices();
+    addNewDevice();
+
 }
 
 onloadBody()
@@ -58,19 +61,19 @@ function sepateArrayForCategories(arrayObj) {
         }
     });
 
-    if(!servidoresHTML){
+    if (!servidoresHTML) {
         let container = document.getElementById('container-servidores');
         container.style.display = 'none'
-    } if(!jjHTML) {
+    } if (!jjHTML) {
         let container = document.getElementById('jj-distribuidora-container');
         container.style.display = 'none'
-    } if(!jkHTML) {
+    } if (!jkHTML) {
         let container = document.getElementById('jk-distribuidora-container');
         container.style.display = 'none'
-    } if(!skTkHTML) {
+    } if (!skTkHTML) {
         let container = document.getElementById('sk-tk');
         container.style.display = 'none'
-    } if(!skRbHTML) {
+    } if (!skRbHTML) {
         let container = document.getElementById('sk-rb');
         container.style.display = 'none'
     }
@@ -125,7 +128,7 @@ function connectToDevice(access_code) {
     }, 1000);
 
     window.location.href = anydeskUrl;
-    
+
     window.addEventListener('blur', function () {
         clearTimeout(timeout);
     });
@@ -155,9 +158,6 @@ function addNewDevice() {
         }
     });
 }
-
-addNewDevice()
-
 
 /** 
  * Itera sobre os botoes edit de cada componente e adiciona as funções equivalentes.
@@ -244,4 +244,36 @@ function deleteRegister(id) {
  */
 function h2LabelDialog() {
     document.querySelector("div.text-label").innerHTML = '<h2>Editar dispositivo</h2>'
+}
+
+/**
+ * faz a busca pelo termo de busca informado no paramentro search_term.
+ *
+ * @async
+ * @param {string} search_term
+ * @returns {Array<Device>}
+ */
+async function searchDeviceByTerm(search_term) {
+    const devices = await deviceService.getSearchTerm(search_term);
+    return devices;
+}
+
+function search_devices() {
+    let search = document.getElementById('search');
+    let search_button = document.getElementById('search-button');
+
+    search.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+           if (search.value.length >= 3) {
+                console.log(search.value);
+           } else {
+                
+           }
+        }
+    })
+
+    search_button.addEventListener('click', () => {
+        console.log(search.value);
+        
+    })
 }
